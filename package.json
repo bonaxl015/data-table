@@ -19,10 +19,10 @@
     "build-storybook": "storybook build",
     "prepare": "yarn build"
   },
-  "keywords": [],
+  "keywords": ["table", "datatable"],
   "author": "bonaxl015",
   "license": "MIT",
-  "description": "",
+  "description": "UI component based from ant-design's Table and Form components. Used for displaying data and perform queries.",
   "devDependencies": {
     "@chromatic-com/storybook": "^1.8.0",
     "@storybook/addon-essentials": "^8.2.9",
