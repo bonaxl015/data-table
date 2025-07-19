@@ -9,16 +9,16 @@
     "/dist"
   ],
   "scripts": {
+    "build": "tsc && vite build",
+    "build:storybook": "storybook build",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "lint-staged": "lint-staged",
-    "build": "tsc && vite build",
+    "prepare": "husky",
+    "start:storybook": "storybook dev -p 6006",
     "test": "vitest run",
     "test-watch": "vitest",
-    "test:ui": "vitest --ui",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "prepare": "husky"
+    "test:ui": "vitest --ui"
   },
   "keywords": [
     "table",
