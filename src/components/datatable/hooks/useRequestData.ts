@@ -1,6 +1,6 @@
 import { OnSearchFunction } from "../components/SearchFields/types/SearchForm.types";
-import { useDataTable } from "../providers/DataTableContext";
-import { OnSearchParams } from "../providers/types/useSearchRequest.types";
+import { useDataTable } from "../providers";
+import type { OnSearchParams } from "../providers";
 import {
   HandleRequestDataFunction,
   UseRequestDataOutput,

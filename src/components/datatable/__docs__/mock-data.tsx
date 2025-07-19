@@ -1,5 +1,4 @@
 import { Button, Input, InputNumber, Space } from "antd";
-import React from "react";
 
 type AlignType = "right" | "center" | "left";
 

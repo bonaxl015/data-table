@@ -11,7 +11,7 @@ import {
   GetPagePropsOutput,
   PageSizeOptions,
 } from "../types/useGetPageProps.types";
-import { useDataTable } from "../../../providers/DataTableContext";
+import { useDataTable } from "../../../providers";
 import { OnSearchFunction } from "../../SearchFields/types/SearchForm.types";
 import useRequestData from "../../../hooks/useRequestData";
 import { PageDefaultValues } from "../../../enums/pageInfo";

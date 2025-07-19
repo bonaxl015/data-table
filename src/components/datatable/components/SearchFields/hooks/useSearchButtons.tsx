@@ -2,7 +2,7 @@ import { Button, Form, Space } from "antd";
 import { ReactNode, useCallback, useEffect, useMemo } from "react";
 import { SearchFieldProps } from "../types/SearchForm.types";
 import { UseSearchButtonOutput } from "../types/useSearchButtons.types";
-import { useDataTable } from "../../../providers/DataTableContext";
+import { useDataTable } from "../../../providers";
 import useRequestData from "../../../hooks/useRequestData";
 import { PageDefaultValues } from "../../../enums/pageInfo";
 

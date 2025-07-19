@@ -1,10 +1,9 @@
 import { Ref, useImperativeHandle } from "react";
-import TableBody from "./components/TableBody/TableBody";
-import TableHeader from "./components/TableHeader/TableHeader";
-import { useDataTable } from "./providers/DataTableContext";
-import DataTableWrapper from "./styles/DataTableWrapper";
-import { DataTableProps } from "./types/DataTable.types";
-import { DataTableRefs } from "./types/DataTableRef.types";
+import TableBody from "../../../TableBody";
+import TableHeader from "../../../TableHeader";
+import { useDataTable } from "../../../../providers";
+import DataTableWrapper from "../../styles/DataTableWrapper";
+import { DataTableProps, DataTableRefs } from "../../../../types";
 
 const InnerDataTableWithRefs = <FormObjectType, RecordType extends object>(
   props: DataTableProps<FormObjectType, RecordType>,

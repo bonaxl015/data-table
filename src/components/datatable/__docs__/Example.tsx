@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { DataTable } from "../index";
 
 const Example: FC = (props) => {
