@@ -1,4 +1,4 @@
-import { OnSearchParams } from "../providers/types/useSearchRequest.types";
+import { OnSearchParams } from "../providers";
 
 export type HandleRequestDataFunction<FormObjectType> = (
   infoObject: OnSearchParams<FormObjectType>,
