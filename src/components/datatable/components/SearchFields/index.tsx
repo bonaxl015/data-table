@@ -3,10 +3,8 @@ import SearchFormWrapper from "./styles/SearchFormWrapper";
 import { SearchFieldProps } from "./types/SearchForm.types";
 import { useFormFields } from "./hooks/useFormFields";
 import { useSearchButtons } from "./hooks/useSearchButtons";
-import { useDataTable } from "../../providers/DataTableContext";
+import { useDataTable } from "../../providers";
 import { ButtonDefaultText } from "../../enums/buttonText";
-
-const { Item } = Form;
 
 function SearchFields<FormObjectType, RecordType extends object>({
   searchFields = [],
@@ -33,7 +31,7 @@ function SearchFields<FormObjectType, RecordType extends object>({
       <Form form={searchFormInstance} layout="inline">
         {formFields}
         {searchButtons}
-        <Item>{extraOperationButtons}</Item>
+        <Form.Item>{extraOperationButtons}</Form.Item>
       </Form>
     </SearchFormWrapper>
   );

@@ -1,6 +1,6 @@
 import TableHeaderWrapper from "./styles/TableHeaderWrapper";
-import SearchFields from "../SearchFields/SearchFields";
-import TableOperations from "../TableOperations/TableOperations";
+import SearchFields from "../SearchFields";
+import TableOperations from "../TableOperations";
 import { TableHeaderProps } from "./types/TableHeader.types";
 
 function TableHeader<FormObjectType, RecordType extends object>({

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDataTable } from "../../../providers/DataTableContext";
+import { useDataTable } from "../../../providers";
 import { UseGetDataSourceOutput } from "../types/useGetDataSource.types";
 
 const useGetDataSource = <FormObjectType, RecordType extends object>(

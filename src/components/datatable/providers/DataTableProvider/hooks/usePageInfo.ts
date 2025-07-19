@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { PageDefaultValues } from "../../enums/pageInfo";
+import { PageDefaultValues } from "../../../enums/pageInfo";
 import {
   UpdatePageSizeInput,
   UsePageInfoOutput,

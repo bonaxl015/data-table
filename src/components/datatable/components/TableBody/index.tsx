@@ -4,7 +4,7 @@ import useDisplayAction from "./hooks/useDisplayAction";
 import useGetColumns from "./hooks/useGetColumns";
 import useGetPageProps from "./hooks/useGetPageProps";
 import useGetDataSource from "./hooks/useGetDataSource";
-import { useDataTable } from "../../providers/DataTableContext";
+import { useDataTable } from "../../providers";
 
 const TableBody = <FormObjectType, RecordType extends object>({
   actionsColumn = [],
@@ -29,6 +29,8 @@ const TableBody = <FormObjectType, RecordType extends object>({
     dataSource as RecordType[],
   );
   const { isLoading } = useDataTable();
+
+  console.log("111111111", paginationProps);
 
   return (
     <Table

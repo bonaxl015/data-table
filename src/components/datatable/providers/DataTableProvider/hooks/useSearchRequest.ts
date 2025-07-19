@@ -6,7 +6,7 @@ import {
 import {
   OnSearchFunction,
   OnSearchResponseData,
-} from "../../components/SearchFields/types/SearchForm.types";
+} from "../../../components/SearchFields/types/SearchForm.types";
 
 const useSearchRequest = <
   FormObjectType,
