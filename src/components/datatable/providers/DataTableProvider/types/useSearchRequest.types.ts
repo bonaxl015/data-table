@@ -1,7 +1,7 @@
 import {
   OnSearchFunction,
   OnSearchResponseData,
-} from "../../components/SearchFields/types/SearchForm.types";
+} from "../../../components/SearchFields/types/SearchForm.types";
 
 export type OnSearchParams<FormObjectType> = {
   values: FormObjectType;
