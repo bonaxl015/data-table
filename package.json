@@ -11,20 +11,26 @@
   "scripts": {
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx --fix",
+    "lint-staged": "lint-staged",
     "build": "tsc && vite build",
     "test": "vitest run",
     "test-watch": "vitest",
     "test:ui": "vitest --ui",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "yarn build"
+    "prepare": "husky"
   },
-  "keywords": ["table", "datatable"],
+  "keywords": [
+    "table",
+    "datatable"
+  ],
   "author": "bonaxl015",
   "license": "MIT",
   "description": "UI component based from ant-design's Table and Form components. Used for displaying data and perform queries.",
   "devDependencies": {
     "@chromatic-com/storybook": "^1.8.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
     "@storybook/addon-links": "^8.2.9",
