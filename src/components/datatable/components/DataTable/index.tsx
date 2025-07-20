@@ -1,18 +1,23 @@
 import { forwardRef, Ref } from "react";
-import InnerDataTableWithRefs from "./components/InnerDataTable";
+import TableBody from "../TableBody";
+import TableHeader from "../TableHeader";
+import DataTableWrapper from "./styles/DataTableWrapper";
 import { DataTableProvider } from "../../providers";
 import { DataTableProps } from "../../types/DataTable.types";
 import { DataTableRefs } from "../../types/DataTableRef.types";
 
-const DataTableWithRefs = <FormObjectType, RecordType extends object>(
+const DataTableForwardedRefs = <FormObjectType, RecordType extends object>(
   props: DataTableProps<FormObjectType, RecordType>,
-  ref: Ref<DataTableRefs<FormObjectType, RecordType>>,
-) => {
-  return (
-    <DataTableProvider>{InnerDataTableWithRefs(props, ref)}</DataTableProvider>
-  );
-};
+  ref?: Ref<DataTableRefs<FormObjectType, RecordType>>,
+) => (
+  <DataTableProvider>
+    <DataTableWrapper>
+      <TableHeader {...props} />
+      <TableBody {...props} ref={ref} />
+    </DataTableWrapper>
+  </DataTableProvider>
+);
 
-const DataTable = forwardRef(DataTableWithRefs);
+const DataTable = forwardRef(DataTableForwardedRefs);
 
 export default DataTable;

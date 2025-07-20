@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { DataTableContext } from "../context";
 import useDataSource from "../hooks/useDataSource";
 import useLoading from "../hooks/useLoading";
@@ -24,25 +25,41 @@ export const DataTableProvider = <FormObjectType, RecordType extends object>({
     FormObjectType,
     RecordType
   >();
+  const values = useMemo(
+    () => ({
+      dataSource,
+      updateDataSource,
+      isLoading,
+      updateLoading,
+      requestData,
+      createInfoObject,
+      searchFormInstance,
+      pageSizeNumber,
+      updatePageSizeNumber,
+      pageNumber,
+      updatePageNumber,
+      totalItems,
+      updateTotalItems,
+    }),
+    [
+      createInfoObject,
+      dataSource,
+      isLoading,
+      pageNumber,
+      pageSizeNumber,
+      requestData,
+      searchFormInstance,
+      totalItems,
+      updateDataSource,
+      updateLoading,
+      updatePageNumber,
+      updatePageSizeNumber,
+      updateTotalItems,
+    ],
+  );
 
   return (
-    <DataTableContext.Provider
-      value={{
-        dataSource,
-        updateDataSource,
-        isLoading,
-        updateLoading,
-        requestData,
-        createInfoObject,
-        searchFormInstance,
-        pageSizeNumber,
-        updatePageSizeNumber,
-        pageNumber,
-        updatePageNumber,
-        totalItems,
-        updateTotalItems,
-      }}
-    >
+    <DataTableContext.Provider value={values}>
       {children}
     </DataTableContext.Provider>
   );
