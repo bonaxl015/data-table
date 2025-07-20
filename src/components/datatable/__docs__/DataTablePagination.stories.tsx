@@ -3,7 +3,6 @@ import Example from "./Example";
 import {
   actionsColumn,
   columns,
-  dataSource,
   dataSourceHundredData,
   searchFields,
 } from "./mock-data";
@@ -47,7 +46,7 @@ export const SetPageSizeOptions: Story = {
     onSearch: (info) => {
       console.log("info", info);
       return {
-        dataSource,
+        dataSource: dataSourceHundredData,
         total: 100,
       };
     },
