@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Run Unit Tests
+    name: Build and Run Unit Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -26,10 +26,49 @@ jobs:
     - name: Run unit tests
       run: yarn test
 
+    - name: Build the library
+      run: yarn build
+
+  version:
+    name: Bump Version
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: github.event_name == 'push'
+    outputs:
+      version: ${{ steps.bump.outputs.version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout master
+
+      - name: Bump patch version
+        id: bump
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+
+          NEW_VERSION=$(npm version patch -m "chore: bump version to %s" | sed 's/^v//')
+          echo "New version: $NEW_VERSION"
+
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Push version bump commit and tag
+        run: |
+          git push origin HEAD:master --follow-tags
+
   publish:
     name: Build and Publish
     runs-on: ubuntu-latest
     needs: [test]
+    if: github.event_name == 'push'
 
     steps:
     - uses: actions/checkout@v4
