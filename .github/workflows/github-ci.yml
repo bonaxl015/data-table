@@ -100,6 +100,7 @@ jobs:
           else
             echo "Version $VERSION does not exist. Proceeding to publish."
             echo "skip=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Publish to GitHub Packages
         if: steps.check-version.outputs.skip == 'false'
