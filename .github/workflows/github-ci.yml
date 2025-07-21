@@ -29,13 +29,11 @@ jobs:
     - name: Build the library
       run: yarn build
 
-  version:
-    name: Bump Version
+  publish:
+    name: Bump Version and Publish
     runs-on: ubuntu-latest
-    needs: [test]
+    needs: test
     if: github.event_name == 'push'
-    outputs:
-      version: ${{ steps.bump.outputs.version }}
 
     steps:
       - name: Checkout repository
@@ -43,38 +41,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup git user
+      - name: Setup Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout master
-
-      - name: Bump patch version
-        id: bump
-        run: |
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          echo "Current version: $CURRENT_VERSION"
-
-          NEW_VERSION=$(npm version patch -m "chore: bump version to %s" | sed 's/^v//')
-          echo "New version: $NEW_VERSION"
-
-          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
-
-      - name: Push version bump commit and tag
-        run: |
-          git push origin HEAD:master --follow-tags
-
-  publish:
-    name: Build and Publish
-    runs-on: ubuntu-latest
-    needs: [version, test]
-    if: github.event_name == 'push'
-
-    steps:
-      - name: CHeckout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -87,6 +57,16 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Bump version
+        id: bump
+        run: |
+          NEW_VERSION=$(npm version patch -m "chore: release v%s" | sed 's/^v//')
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Push version commit and tag
+        run: |
+          git push origin HEAD:master --follow-tags
+
       - name: Build the library
         run: yarn build
 
@@ -94,14 +74,12 @@ jobs:
         id: check-version
         run: |
           PACKAGE_NAME="@bonaxl015/data-table"
-          VERSION="${{ needs.version.outputs.version }}"
-          echo "Checking if version $VERSION of $PACKAGE_NAME exists..."
+          VERSION="${{ steps.bump.outputs.version }}"
 
+          echo "Checking if $PACKAGE_NAME@$VERSION already exists..."
           if npm view "$PACKAGE_NAME@$VERSION" version --registry=https://npm.pkg.github.com/ > /dev/null 2>&1; then
-            echo "Version $VERSION already exists on GitHub Packages. Skipping publish."
             echo "skip=true" >> $GITHUB_OUTPUT
           else
-            echo "Version $VERSION does not exist. Proceeding to publish."
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
@@ -110,4 +88,3 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
