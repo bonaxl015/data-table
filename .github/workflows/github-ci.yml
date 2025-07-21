@@ -93,7 +93,7 @@ jobs:
       - name: Get version from version tag
         id: get-version
         run: |
-          VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
+          VERSION=$(node -p "require('./package.json').version")
           echo "Version from git tag: $VERSION"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
