@@ -91,7 +91,7 @@ jobs:
         id: check-version
         run: |
           PACKAGE_NAME="@bonaxl015/data-table"
-          VERSION=${{ steps.get-version.outputs.version }}
+          VERSION=${{ steps.bump.outputs.version }}
           echo "Checking if version $VERSION of $PACKAGE_NAME exists..."
 
           if npm view "$PACKAGE_NAME@$VERSION" version --registry=https://npm.pkg.github.com/ > /dev/null 2>&1; then
