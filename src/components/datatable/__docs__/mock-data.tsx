@@ -122,7 +122,13 @@ export const extraOperationButtons = (
 );
 
 export const tableOperations = (
-  <div style={{ display: "flex", justifyContent: "space-between" }}>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    }}
+  >
     <p>Additional Operations</p>
     <Button> Additional Operations</Button>
   </div>

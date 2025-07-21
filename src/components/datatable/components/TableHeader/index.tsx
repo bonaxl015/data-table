@@ -1,6 +1,5 @@
 import TableHeaderWrapper from "./styles/TableHeaderWrapper";
 import SearchFields from "../SearchFields";
-import TableOperations from "../TableOperations";
 import { TableHeaderProps } from "./types/TableHeader.types";
 
 function TableHeader<FormObjectType, RecordType extends object>({
@@ -24,7 +23,7 @@ function TableHeader<FormObjectType, RecordType extends object>({
         onSearch={onSearch}
         onBeforeReset={onBeforeReset}
       />
-      <TableOperations tableOperations={tableOperations} />
+      {tableOperations && <div>{tableOperations}</div>}
     </TableHeaderWrapper>
   );
 }

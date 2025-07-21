@@ -26,6 +26,7 @@ export interface SearchFieldProps<FormObjectType, RecordType> {
   searchFields?: SearchFieldsType;
   searchButtonText?: ReactNode;
   resetButtonText?: ReactNode;
+  tableOperations?: ReactNode;
   extraOperationButtons?: ReactNode;
   loadDataImmediately?: boolean;
   onSearch?: OnSearchFunction<FormObjectType, RecordType>;
