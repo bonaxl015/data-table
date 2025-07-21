@@ -5,7 +5,7 @@ import {
   useEffect,
   useImperativeHandle,
 } from "react";
-import { Table } from "antd";
+import Table from "antd/es/table";
 import { TableBodyProps } from "./types/TableBody.types";
 import useDisplayAction from "./hooks/useDisplayAction";
 import useGetColumns from "./hooks/useGetColumns";
