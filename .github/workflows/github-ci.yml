@@ -90,18 +90,11 @@ jobs:
       - name: Build the library
         run: yarn build
 
-      - name: Get version from version tag
-        id: get-version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "Version from git tag: $VERSION"
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
       - name: Check if version already exists
         id: check-version
         run: |
           PACKAGE_NAME="@bonaxl015/data-table"
-          VERSION=${{ steps.get-version.outputs.version }}
+          VERSION="${{ needs.version.outputs.version }}"
           echo "Checking if version $VERSION of $PACKAGE_NAME exists..."
 
           if npm view "$PACKAGE_NAME@$VERSION" version --registry=https://npm.pkg.github.com/ > /dev/null 2>&1; then
