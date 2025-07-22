@@ -13,7 +13,7 @@ function SearchFields<FormObjectType, RecordType extends object>({
   searchFields = [],
   searchButtonText = ButtonDefaultText.FILTER,
   resetButtonText = ButtonDefaultText.RESET,
-  extraOperationButtons = <></>,
+  extraOperationButtons = undefined,
   loadDataImmediately = true,
   onSearch,
   onBeforeReset,
@@ -101,7 +101,9 @@ function SearchFields<FormObjectType, RecordType extends object>({
       <Form form={searchFormInstance} layout="inline">
         {formFields}
         {searchButtons}
-        <Form.Item>{extraOperationButtons}</Form.Item>
+        {extraOperationButtons && (
+          <Form.Item>{extraOperationButtons}</Form.Item>
+        )}
       </Form>
     </SearchFormWrapper>
   );
