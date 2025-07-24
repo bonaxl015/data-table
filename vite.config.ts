@@ -3,6 +3,8 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import react from "@vitejs/plugin-react";
+import { analyzer } from "vite-bundle-analyzer";
+import path from "path";
 import { peerDependencies } from "./package.json";
 
 export default defineConfig({
@@ -19,7 +21,15 @@ export default defineConfig({
     sourcemap: true,
     emptyOutDir: true,
   },
-  plugins: [dts(), react()],
+  plugins: [
+    dts(),
+    react(),
+    analyzer({
+      analyzerMode: "static",
+      fileName: path.resolve(process.cwd(), "bundle-analyzer/index.html"),
+      reportTitle: "DataTable Bundle Analyzer",
+    }),
+  ],
   test: {
     setupFiles: "./vitest.setup.ts",
     environment: "jsdom",
