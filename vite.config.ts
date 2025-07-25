@@ -11,23 +11,35 @@ export default defineConfig(({ mode }) => ({
   build: {
     lib: {
       entry: "./src/index.ts",
-      name: "vite-react-ts-button",
+      name: "vite-data-table",
       fileName: (format) => `index.${format}.js`,
-      formats: ["cjs", "es"],
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: [...Object.keys(peerDependencies)],
+      external: [...Object.keys(peerDependencies), "react", "react-dom"],
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
     },
     sourcemap: mode !== "production",
+    minify: "esbuild",
     emptyOutDir: true,
+    cssCodeSplit: true,
+    target: "es2015",
   },
   plugins: [
-    dts(),
+    dts({
+      insertTypesEntry: true,
+    }),
     react(),
     analyzer({
       analyzerMode: "static",
       fileName: path.resolve(process.cwd(), "bundle-analyzer.html"),
       reportTitle: "DataTable Bundle Analyzer",
+      openAnalyzer: false,
     }),
   ],
   test: {
