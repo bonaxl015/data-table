@@ -7,7 +7,7 @@ import { analyzer } from "vite-bundle-analyzer";
 import path from "path";
 import { peerDependencies } from "./package.json";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   build: {
     lib: {
       entry: "./src/index.ts",
@@ -18,7 +18,7 @@ export default defineConfig({
     rollupOptions: {
       external: [...Object.keys(peerDependencies)],
     },
-    sourcemap: true,
+    sourcemap: mode !== "production",
     emptyOutDir: true,
   },
   plugins: [
@@ -26,7 +26,7 @@ export default defineConfig({
     react(),
     analyzer({
       analyzerMode: "static",
-      fileName: path.resolve(process.cwd(), "bundle-analyzer/index.html"),
+      fileName: path.resolve(process.cwd(), "bundle-analyzer.html"),
       reportTitle: "DataTable Bundle Analyzer",
     }),
   ],
@@ -36,4 +36,4 @@ export default defineConfig({
     globals: true,
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
   },
-});
+}));
